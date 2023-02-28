@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoute from './routes/user.route.js';
 import authRoute from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -19,11 +20,12 @@ const connectMongo = async () => {
 };
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
 
 app.listen(port, () => {
-  connectMongo();
+	connectMongo();
 	console.log('server started.');
 });
